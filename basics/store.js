@@ -1,3 +1,5 @@
+import allRecipesData from './data.js';
+
 const initialState = {
   allRecipes: [],
   favoriteRecipes: [],
@@ -23,7 +25,10 @@ export const clearSearchTerm = () => {
 // Dispatched when the user first opens the application.
 // Sends the allRecipesData array to the store.
 export const loadData = () => {
-
+  return {
+    type: 'allRecipes/loadData',
+    payload: allRecipesData
+  }
 }
 
 // Dispatched when the user clicks on the heart icon of 

@@ -1,94 +1,89 @@
 import { createStore } from 'redux';
 import allRecipesData from './data.js';
 
-const initialState = {
-  allRecipes: [],
-  favoriteRecipes: [],
-  searchTerm: ''
-};
+// Action Creators
+////////////////////////////////////////
 
-// Dispatched when the user types in the search input.
-// Sends the search term to the store.
+export const addRecipe = (recipe) => {
+  return { 
+    type: 'favoriteRecipes/addRecipe', 
+    payload: recipe 
+  };
+}
+
+export const removeRecipe = (recipe) => {
+  return { 
+    type: 'favoriteRecipes/removeRecipe', 
+    payload: recipe 
+  };
+}
+
 export const setSearchTerm = (term) => {
-  return { 
-    type: 'searchTerm/setSearchTerm', 
-    payload: term 
-  };
-}
-
-// Dispatched when the user presses the clear search button.
-export const clearSearchTerm = () => {
-  return { 
-    type: 'searchTerm/clearSearchTerm' 
-  };
-}
-
-// Dispatched when the user first opens the application.
-// Sends the allRecipesData array to the store.
-export const loadData = () => {
   return {
-    type: 'allRecipes/loadData',
-    payload: allRecipesData
+    type: 'searchTerm/setSearchTerm',
+    payload: term
   }
 }
 
-// Dispatched when the user clicks on the heart icon of 
-// a recipe in the "All Recipes" section.
-// Sends the recipe object to the store.
-export const addRecipe = (recipe) => {
+export const clearSearchTerm = () => {
   return {
-  type: 'favoriteRecipes/addRecipe',
-  payload: recipe
- }
-
+    type: 'searchTerm/clearSearchTerm'
+  }; 
 }
 
-// Dispatched when the user clicks on the broken heart 
-// icon of a recipe in the "Favorite Recipes" section.
-// Sends the recipe object to the store.
-export const removeRecipe = (recipe) => {
-   return {
-  type: 'favoriteRecipes/removeRecipe',
-  payload: recipe
- }
+export const loadData = () => {
+  return { 
+    type: 'allRecipes/loadData', 
+    payload: allRecipesData
+  }; 
 }
 
+// Reducers
+////////////////////////////////////////
 
-/* Complete this reducer */
-const recipesReducer = (state = initialState, action) => {
+const initialAllRecipes = [];
+const allRecipesReducer = (allRecipes = initialAllRecipes, action) => {
   switch(action.type) {
     case 'allRecipes/loadData':
-      return { 
-        ...state,
-        allRecipes: action.payload
-      }
-    case 'searchTerm/clearSearchTerm':
-      return {
-        ...state,
-        searchTerm: ''
-      }
-    
-    case 'searchTerm/setSearchTerm':
-      return { 
-        ...state,
-        searchTerm: action.payload
-      }
-
-    case 'favoriteRecipes/addRecipe':
-      return {
-        ...state,
-        favoriteRecipes: [...state.favoriteRecipes, action.payload]
-      }
-
-    case 'favoriteRecipes/removeRecipe':
-      return {
-        ...state,
-        favoriteRecipes: state.favoriteRecipes.filter(recipe => recipe.id !== action.payload.id)
-      }
-
+      return action.payload
     default:
-      return state;
+      return allRecipes;
   }
-};
+}
 
-export const store = createStore(recipesReducer);
+const initialSearchTerm = '';
+const searchTermReducer = (searchTerm = initialSearchTerm, action) => {
+  switch(action.type) {
+    case 'searchTerm/setSearchTerm':
+      return action.payload;
+    case 'searchTerm/clearSearchTerm':
+      return '';
+    default: 
+      return searchTerm;
+  }
+}
+
+// Create the initial state for this reducer.
+const favoriteRecipesReducer = (favoriteRecipes = 'REPLACE_ME', action) => {
+  switch(action.type) {
+    
+    // Add action.type cases here.
+
+    // Don't forget to set the default case!
+
+  }
+}
+
+
+const rootReducer = (state = {}, action) => {
+  const nextState = {
+    allRecipes: allRecipesReducer(state.allRecipes, action),
+    searchTerm: searchTermReducer(state.searchTerm, action),
+    // Add in the favoriteRecipes slice using the 
+    // favoriteRecipesReducer function. 
+  } 
+  return nextState;
+}
+
+export const store = createStore(rootReducer);
+

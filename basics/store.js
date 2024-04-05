@@ -87,6 +87,7 @@ const rootReducer = (state = {}, action) => {
     searchTerm: searchTermReducer(state.searchTerm, action),
     // Add in the favoriteRecipes slice using the 
     // favoriteRecipesReducer function. 
+    favoriteRecipes: favoriteRecipesReducer(state.favoriteRecipes, action)
   } 
   return nextState;
 }

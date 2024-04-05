@@ -75,7 +75,10 @@ const recipesReducer = (state = initialState, action) => {
       }
 
     case 'favoriteRecipes/addRecipe':
-      return state // fix me!
+      return {
+        ...state,
+        favoriteRecipes: [...state.favoriteRecipes, action.payload]
+      }
 
     case 'favoriteRecipes/removeRecipe':
       return state // fix me!

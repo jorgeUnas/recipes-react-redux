@@ -64,13 +64,19 @@ const searchTermReducer = (searchTerm = initialSearchTerm, action) => {
 }
 
 // Create the initial state for this reducer.
-const favoriteRecipesReducer = (favoriteRecipes = 'REPLACE_ME', action) => {
+const initialFavoriteRecipes = [];
+const favoriteRecipesReducer = (favoriteRecipes = initialFavoriteRecipes, action) => {
   switch(action.type) {
     
     // Add action.type cases here.
+      case 'favoriteRecipes/addRecipe' :
+        return  [...favoriteRecipes, action.payload];
+      case 'favoriteRecipes/removeRecipe' : 
+          return  favoriteRecipes.filter(recipe => recipe.id !== action.payload.id);
+      default : 
+        return favoriteRecipes;
 
     // Don't forget to set the default case!
-
   }
 }
 

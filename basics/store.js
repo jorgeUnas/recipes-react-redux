@@ -35,6 +35,10 @@ export const loadData = () => {
 // a recipe in the "All Recipes" section.
 // Sends the recipe object to the store.
 export const addRecipe = (recipe) => {
+  return {
+  type: 'favoriteRecipes/addRecipe',
+  payload: recipe
+ }
 
 }
 

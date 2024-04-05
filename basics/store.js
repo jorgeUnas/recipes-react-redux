@@ -46,5 +46,8 @@ export const addRecipe = (recipe) => {
 // icon of a recipe in the "Favorite Recipes" section.
 // Sends the recipe object to the store.
 export const removeRecipe = (recipe) => {
-
+   return {
+  type: 'favoriteRecipes/removeRecipe',
+  payload: recipe
+ }
 }

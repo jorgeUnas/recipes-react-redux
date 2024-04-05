@@ -81,7 +81,10 @@ const recipesReducer = (state = initialState, action) => {
       }
 
     case 'favoriteRecipes/removeRecipe':
-      return state // fix me!
+      return {
+        ...state,
+        favoriteRecipes: state.favoriteRecipes.filter(recipe => recipe.id !== action.payload.id)
+      }
 
     default:
       return state;

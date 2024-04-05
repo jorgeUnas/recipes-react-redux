@@ -69,8 +69,10 @@ const recipesReducer = (state = initialState, action) => {
       }
     
     case 'searchTerm/setSearchTerm':
-      return//state // fix me!
- 
+      return { 
+        ...state,
+        searchTerm: action.payload
+      }
 
     case 'favoriteRecipes/addRecipe':
       return state // fix me!

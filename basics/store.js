@@ -85,3 +85,6 @@ const reducers = {
   favoriteRecipes: favoriteRecipesReducer, 
   searchTerm: searchTermReducer
 }
+
+const rootReducer = combineReducers(reducers);
+export const store = createStore(rootReducer);

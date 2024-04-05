@@ -1,3 +1,4 @@
+import { createStore } from 'redux';
 import allRecipesData from './data.js';
 
 const initialState = {
@@ -51,3 +52,35 @@ export const removeRecipe = (recipe) => {
   payload: recipe
  }
 }
+
+
+/* Complete this reducer */
+const recipesReducer = (state = initialState, action) => {
+  switch(action.type) {
+    case 'allRecipes/loadData':
+      return { 
+        ...state,
+        allRecipes: action.payload
+      }
+    case 'searchTerm/clearSearchTerm':
+      return {
+        ...state,
+        searchTerm: ''
+      }
+    
+    case 'searchTerm/setSearchTerm':
+      return//state // fix me!
+ 
+
+    case 'favoriteRecipes/addRecipe':
+      return state // fix me!
+
+    case 'favoriteRecipes/removeRecipe':
+      return state // fix me!
+
+    default:
+      return state;
+  }
+};
+
+export const store = createStore(recipesReducer);

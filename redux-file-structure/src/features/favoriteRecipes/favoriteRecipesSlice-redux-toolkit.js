@@ -5,7 +5,14 @@ import { selectSearchTerm } from '../searchTerm/searchTermSlice.js';
 const options = {
   name: 'favoriteRecipes',
   initialState: [], 
-  reducers: {}
+  reducers: {
+    addRecipe: (state, action) => {
+       return [...state, action.payload];
+    },
+    removeRecipe: (state, action) => {
+        return state.filter(recipe => recipe.id !== action.payload.id); 
+    }
+  }
 };
 
 /* Do not delete the code below...*/

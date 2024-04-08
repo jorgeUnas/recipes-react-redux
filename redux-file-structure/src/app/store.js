@@ -8,7 +8,9 @@ import {searchTermReducer} from '../features/searchTerm/searchTermSlice';
 
 const reducers = {
   // Add the slice properties here
-  
+  allRecipes: allRecipesReducer, 
+  favoriteRecipes: favoriteRecipesReducer, 
+  searchTerm: searchTermReducer
 }
 
 // Declare the store here.

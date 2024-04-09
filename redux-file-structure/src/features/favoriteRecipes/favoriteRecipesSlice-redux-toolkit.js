@@ -1,23 +1,18 @@
-import { createSlice }  from '@reduxjs/toolkit';
-import { selectSearchTerm } from '../searchTerm/searchTermSlice.js';
+import { createSlice } from '@reduxjs/toolkit';
+import { selectSearchTerm } from './searchTermSlice.js';
 
-/* Create your Slice object here. */
-const options = {
-  name: 'favoriteRecipes',
-  initialState: [], 
+export const favoriteRecipesSlice = createSlice({
+  name: "favoriteRecipes",
+  initialState: [],
   reducers: {
     addRecipe: (state, action) => {
-       return [...state, action.payload];
+      state.push(action.payload);
     },
     removeRecipe: (state, action) => {
-        return state.filter(recipe => recipe.id !== action.payload.id); 
-    }
-  }
-};
-
-export const favoriteRecipesSlice = createSlice(options);
-
-/* Do not delete the code below...*/
+      return state.filter(recipe => recipe.id !== action.payload.id)
+    },
+  },
+});
 
 export const selectFavoriteRecipes = (state) => state.favoriteRecipes;
 
@@ -29,3 +24,9 @@ export const selectFilteredFavoriteRecipes = (state) => {
     recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 };
+
+//Export the slice reducer and the actions from the favoriteRecipesSlice
+
+export const {addRecipe, removeRecipe} = favoriteRecipesSlice.actions;
+
+export default favoriteRecipesSlice.reducer; 

@@ -14,3 +14,4 @@ const reducers = {
 }
 
 // Declare the store here.
+export const store = createStore(combineReducers(reducers)); 
